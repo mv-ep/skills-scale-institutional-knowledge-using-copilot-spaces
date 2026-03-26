@@ -29,12 +29,58 @@ Guidance for managing day-to-day execution and tracking progress toward project 
 - Use dashboards for key signals (errors, latency, usage)
 
 ## Blocker Escalation
-- Level 1: Team-level triage in daily standup
-- Level 2: PM escalates to Product Lead and dependent teams
-- Level 3: Sponsor-level escalation for business-impacting issues
+
+| Level | Trigger | Responsible Role | Action |
+|-------|---------|-----------------|--------|
+| 1 | Blocker raised in standup | Developer or QA Lead | Team triage; owner identified within 24 hours |
+| 2 | Blocker unresolved after 24 h, or cross-team dependency | Project Manager | Escalates to Product Lead and dependent team leads; documents in risk register |
+| 3 | Business-impacting or customer-facing issue | PM + Stakeholder Liaison | Sponsor-level escalation; Stakeholder Liaison prepares business-impact summary |
 
 ## Execution Checklist
-- [ ] Branching and PR conventions documented in repo
-- [ ] CI configured for tests and lint
-- [ ] Regular demos scheduled
-- [ ] Risk register updated weekly
+
+### Pre-Sprint / Kickoff
+- [ ] Acceptance criteria reviewed and marked testable by **QA Lead** before sprint planning
+- [ ] **UX Designer** designs reviewed and assets handed off to Developers
+- [ ] Branching and PR conventions confirmed in repo
+
+### During Development
+- [ ] PRs are small (≤ 400 lines when possible), linked to issues, and include acceptance criteria
+- [ ] CI (tests + lint + security scan) is green before requesting review
+- [ ] **QA Lead** reviews PR description for testability; adds or updates test plan
+- [ ] At least one peer approval before merge (or team-defined policy)
+
+### QA Acceptance Gate
+- [ ] Feature deployed to staging environment by **Operations Engineer**
+- [ ] **QA Lead** executes test plan; defects filed and triaged
+- [ ] **UX Designer** completes UX acceptance review in staging
+- [ ] **QA Lead** issues written sign-off (or lists outstanding blocking defects)
+- [ ] No PRs merged to release branch without QA sign-off
+
+### Pre-Deployment Gate
+- [ ] **Release Manager** confirms all approved PRs are merged to release branch
+- [ ] **Release Manager** confirms rollback plan is documented and tested
+- [ ] **Operations Engineer** verifies infrastructure readiness (capacity, secrets, monitoring)
+- [ ] **Support Representative** confirms knowledge base and support docs are updated
+
+### Post-Deployment
+- [ ] **Operations Engineer** and **Release Manager** run post-deploy smoke tests
+- [ ] **Release Manager** distributes final release notes
+- [ ] **Stakeholder Liaison** sends release announcement
+- [ ] Risk register updated; sprint retrospective scheduled
+
+## Execution Role Responsibilities
+
+| Step | Primary Responsible Role |
+|------|--------------------------|
+| Write release notes | Product Manager (PdM) with input from Developers |
+| Create QA test plan | QA Lead |
+| Perform smoke tests (staging) | QA Lead + Operations Engineer |
+| Issue QA sign-off | QA Lead |
+| Merge PRs to release branch | Release Manager (after QA sign-off) |
+| Confirm rollback plan | Release Manager |
+| Execute production deployment | Operations Engineer (Release Manager coordinates) |
+| Run post-deploy verification | Operations Engineer + Release Manager |
+| Notify stakeholders of release | Stakeholder Liaison |
+| Update support documentation | Support Representative |
+| Track blockers and risks | Project Manager |
+| Conduct UX acceptance review | UX Designer |
