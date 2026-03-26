@@ -29,12 +29,47 @@ Guidance for managing day-to-day execution and tracking progress toward project 
 - Use dashboards for key signals (errors, latency, usage)
 
 ## Blocker Escalation
-- Level 1: Team-level triage in daily standup
-- Level 2: PM escalates to Product Lead and dependent teams
-- Level 3: Sponsor-level escalation for business-impacting issues
+- **Level 1 — Team triage**: Developer or QA Lead raises blocker in daily standup; team attempts same-day resolution
+- **Level 2 — PM escalation**: Project Manager escalates to Product Manager and dependent teams within 24 hours if unresolved; Release Manager notified if the blocker affects a release window
+- **Level 3 — Sponsor escalation**: Project Manager escalates to Sponsor or executive stakeholder via Stakeholder Liaison for business-impacting issues unresolved after 48 hours
+
+## Execution Role Responsibilities
+
+| Step | Primary Responsible Role |
+|---|---|
+| Write and update release notes | Release Manager (drafts); Product Manager (reviews content) |
+| Perform smoke tests | QA Lead (coordinates); Developers (execute) |
+| Notify stakeholders of release | Release Manager (triggers); Stakeholder Liaison (distributes) |
+| Update project board and status | Project Manager |
+| Coordinate test plan for PRs | QA Lead (owns plan); PR Author (provides test evidence) |
+| Verify CI/CD pipeline health | DevOps/On-call |
+| Confirm rollback plan before deploy | Release Manager |
+| File post-release issues | Support Representative |
 
 ## Execution Checklist
+
+### Pre-sprint / Pre-milestone
+- [ ] Acceptance criteria defined and reviewed by Product Manager and UX Designer
+- [ ] Test plan prepared by QA Lead and shared with Developers
 - [ ] Branching and PR conventions documented in repo
-- [ ] CI configured for tests and lint
-- [ ] Regular demos scheduled
-- [ ] Risk register updated weekly
+- [ ] CI configured for tests, lint, and security scanning
+- [ ] Regular demos scheduled with Stakeholder Liaison or Product Manager
+
+### During sprint / Development
+- [ ] PRs linked to issues with acceptance criteria included
+- [ ] PR author coordinates with QA Lead on test evidence before requesting review
+- [ ] Code review approval obtained from at least one peer
+- [ ] CI checks pass (tests, lint, security scan) before merge
+
+### Pre-release acceptance gate
+- [ ] QA Lead verifies test sign-off and marks feature ready for release branch
+- [ ] Product Manager validates acceptance criteria are met
+- [ ] Release Manager confirms rollback plan is documented (see [Release Checklist](./release-checklist.md))
+- [ ] Release notes drafted and reviewed
+
+### Post-release
+- [ ] Smoke tests executed by QA Lead / Developers post-deploy
+- [ ] Release Manager sends release announcement to Stakeholder Liaison and Support Representative
+- [ ] Support Representative monitors for user-reported issues and files any new bugs
+- [ ] Risk register updated by Project Manager
+- [ ] Retrospective action items captured
